@@ -390,6 +390,7 @@ public class Hand {
 		Collections.sort(cardsInHand);
 		for(int i=0;i<cardsInHand.size();i++){
 			System.out.print(cardsInHand.get(i) + " " );
+			int i = 0;
 		}
 		System.out.print("\n");
 		for(int i=0;i<cardsInHand.size()-1;i++){			
