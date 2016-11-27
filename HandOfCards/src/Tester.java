@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Tester {
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		
 	/*	*//**************************************************************************************************
 		 *             CREATE NEW SCANNER OBJECT AND STORAGE FOR VARIABLES (IF ANY ARE NEEDED)            *
@@ -151,13 +151,13 @@ public class Tester {
 		 *                                                                                                *
 		 *************************************************************************************************/
 		
-		ArrayList<Card> hand = new ArrayList<Card>();
-	//	hand.add(new Card("3", "C"));
-		hand.add(new Card("A", "C"));
-		hand.add(new Card("6", "C"));
-		hand.add(new Card("2", "C"));		
-		hand.add(new Card("9", "H"));
-		hand.add(new Card("3", "C"));
+//		ArrayList<Card> hand = new ArrayList<Card>();
+//	//	hand.add(new Card("3", "C"));
+//		hand.add(new Card("A", "C"));
+//		hand.add(new Card("6", "C"));
+//		hand.add(new Card("2", "C"));		
+//		hand.add(new Card("9", "H"));
+//		hand.add(new Card("3", "C"));
 
 		//hand.add(new Card("7", "S"));
 		//hand.add(new Card("7", "D"));
@@ -233,25 +233,25 @@ public class Tester {
 //				newHand.printHand(hand);
 //			}
 //		}
-		
-		Hand.highCard(hand);
-		Hand.twoPair(hand);
-		Hand.threeOfAKind(hand);
-		Hand.fourOfAKind(hand);
-		Hand.flush(hand);
-		Hand.straight(hand);
-		System.out.println("");
-		System.out.println("END OF TEST THUS FAR");
-		
-		
-		
-		
+//		
+////		//Hand.highCard(hand);
+////		//Hand.twoPair(hand);
+////		//Hand.threeOfAKind(hand);
+////		///Hand.fourOfAKind(hand);
+////		//Hand.flush(hand);
+////		//Hand.straight(hand);
+////		//System.out.println("");
+////		//System.out.println("END OF TEST THUS FAR");
+////		
+//		
+//		
+//		
 		/**************************************************************************************************
 		 *                                                                                                *
 		 *                                                                                                *
 		 *************************************************************************************************/
 				
-	}
+//	}
 
 }
 

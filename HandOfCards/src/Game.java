@@ -27,16 +27,7 @@ public class Game {
 		String userInput1 = null;
 		boolean proceed = false;
 		final int STARTING_CHIPS = 1000; // Number of chips at beginning of game will not change
-		
-		
-		//==============GAME PLAY STORAGE ===========================================
-		int[] round1bets = new int[numPlayers];
-		int[] round2bets = new int[numPlayers];
-		
-		//==============ARRAYLISTS===================================================
-		
-		
-		
+
 		/**************************************************************************************************
 		 *                          INTRO MESSAGES AND USER INPUT DATA                                    *
 		 *                                                                                                *
@@ -135,7 +126,7 @@ public class Game {
 					}
 					proceed = true;
 					
-					if(intBet > players.get(i).getChips() || intBet < 0){
+					if(intBet > players.get(i).getChips() || intBet < 0 || intBet < minBet){
 						System.out.println("Your bet must be in the range of 0 to the max number of chips you have, above the minimum bet set by first player of " +minBet+" chips");
 						proceed = false;
 						break;
@@ -152,22 +143,46 @@ public class Game {
 			}
 		}while(!proceed);
 		
+		
+		//TODO: DO CARD EXCHANGE BY PLAYER INDEX (is this needed)?	
+		
+		// TODO: MAKE FINAL BETS (is this needed)?	
+		
 		for(int i = 0; i < players.size(); i++){
 		System.out.println(players.get(i).getChips());
 		}
 		
 		System.out.println("");
 		System.out.println("The current pot is up to: " + bettingPot + " chips.");
+		System.out.println("");
 		
+		System.out.println("The time has come folks...");
+		System.out.println("");
+		String winner = "";
+		int tempHighestScore = 0;
+		for(int i = 0; i < players.size(); i++){
+			Hand currHand = players.get(i).getHand();
+			Scoring sc = new Scoring(currHand);
+			int myscore = sc.getScore();
+			players.get(i).increaseScore(myscore);
+			System.out.println(players.get(i).getName() + ", your score is " + myscore);
+						
+			if(tempHighestScore == 0){
+				winner = players.get(i).getName();
+				tempHighestScore = myscore;
+			}
+			else{
+				if(myscore > tempHighestScore){
+					winner = players.get(i).getName();
+					tempHighestScore = myscore;
+				}
+				//TODO: Handle  ties
+			}
+			
+		}
+		System.out.println("The winner is " + winner);
 		
-		//TODO: DO CARD EXCHANGE BY PLAYER INDEX (is this needed)?	
-		
-		// TODO: MAKE FINAL BETS (is this needed)?				
-		
-		// EVALUATE HANDS
-		// DECLARE WINNER 
-		// AWARD WINNINGS 
-		
+	
 		
 		kb.close();
 	}
