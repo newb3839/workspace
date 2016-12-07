@@ -1,58 +1,103 @@
 
 import mpi.*;
-import java.util.Random;
+//import java.util.Random;
 import java.util.Scanner;
 import java.math.BigInteger;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 
 class MPIHelloWorld
 {
 	static public void main(String[] args) throws Exception {
-		final long long2to64th = Long.parseUnsignedLong("18446744073709551615");
+	
+		
+		
 		
 		int my_rank = MPI.COMM_WORLD.Rank();
-        int my_size = MPI.COMM_WORLD.Size();
-        
-        long userNumber = 5501;
-        
-        if(userNumber % 2 == 0){
-        	userNumber +=1;
-        }
-        
-        if(my_rank == 0){
-        	
-        	// get number from user
-        	
-        	// broadcast this number to the other processes
-        	int distribution = ((my_rank -1) * 4 + (my_size));
-        	
-        	for(int i = 0; i < long2to64th; i += 2){
-        		
-        	}
-        	
-        	
-        	
-        	
-        }else if(my_rank == 1){
-        	
-        	
-        	
-        	
-        }else if(my_rank == 2){
-        	
-        	
-        	
-        }else if(my_rank == 3){
-        	
-        	
-        	
-        }else if(my_rank == 4){
-        	
-        	
-        	
-        }
+		int my_size = MPI.COMM_WORLD.Size();
+		
+		final int INT_MAX = Integer.MAX_VALUE;
+		final long LONG_MAX = Long.MAX_VALUE;
+		final long BLOCK_SIZE = 1000000;
+		long userInput = 0;
+		
+		if(my_rank == 0){
+			Scanner kb = new Scanner(System.in);
+			System.out.println("Welcome to Chris Newby's prime calculator! ");
+			System.out.print("Please enter the number to start at: ");
+			userInput = kb.nextLong();
+			if(userInput % 2 == 0){ // CHANGES EVEN BEGINNING NUMBER TO NEXT AVAILABLE ODD
+				userInput++;
+			}
+			MPI.COMM_WORLD.Bcast(userInput, 0, 1, MPI.LONG, 0);
+			
+			System.out.println("And so it begins... From " + userInput);
+			
+			kb.close();
+			
+		}else{
+			
+			MPI.COMM_WORLD.Bcast(userInput, 0, 1, MPI.LONG, 0);
+			
+			long startingPoint = userInput;
+			long a = 0, b = 0, block = 1000000, count = 1, counter = 0;
+			
+			long nonZeroDist = (count - 1) * block + (my_rank - 1); // Distribution block formula
+			
+			long incriment = ((my_size - 1) * BLOCK_SIZE);
+			
+			// I = (non zero dist * block size) 
+			// I += (my_size * block size)
+			// I < block size
+			
+			for(a = nonZeroDist; a < LONG_MAX; a += incriment){
+				boolean isPrime = true;
+				double sqRoot = Math.sqrt(a);
+			
+				for(b = 2; b < sqRoot; b++ ){
+					if(a % b == 0){
+						isPrime = false;
+						break;
+					}
+				}
+				if(isPrime){
+					//primeList.add(a);
+					System.out.print(a + " ");
+					counter++;
+					if(counter % 15 == 0){
+						System.out.print("\n");
+					}
+				}
+			}	
+		}
 	}
-}	
+}		
+		
+//public void writeToFile(char[] num){
+//	String prime = String.valueOf(char[] num);	
+//	private static String PATH = "C:\\Users\\chris\\Desktop\\PRIMES";
+//	
+//	FileWriter fw;
+//	try{
+//		fw = new FileWriter(PATH, false);
+//		PrintWriter p2 = new PrintWriter(fw);
+//		p2.print(prime + " ");
+//		}
+//		p2.close();
+//	}catch(IOException ignore){
+//		System.out.println("Something went wrong!");
+//	}
+//}		
+//		
+		
+		
+		
+		
+		
+		/////////////////////////////////////////////////////////////////////////////
+	
 
 ///////////////////////////////////////////////COMPLETE PI PROJECT//////////////////////////////////////////
 /*public static final double PI = 3.141592653589793238462643;

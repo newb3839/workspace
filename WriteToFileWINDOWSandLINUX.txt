@@ -1,0 +1,78 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+public class createFile {
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+        String osname = System.getProperty("os.name", "").toLowerCase();
+        if (osname.startsWith("windows")) {
+            String text = "Hello world Windows";
+            try {
+                File file = new File("C:/example.txt");
+                BufferedWriter output = new BufferedWriter(new FileWriter(file));
+                output.write(text);
+                output.close();
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        } else if (osname.startsWith("linux")) {    
+            String text = "Hello world Linux";
+            try {
+                File file = new File("/root/Desktop/example.txt");
+                BufferedWriter output = new BufferedWriter(new FileWriter(file));
+                output.write(text);
+                output.close();
+            } catch ( IOException e ) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Sorry, your operating system is different");    
+        }
+    }
+}
+
+===================================================================================================================
+
+Scanner s = new Scanner(new File("/home/me/java/ex.txt")); // used only for the file path - looks to be normal linux
+
+===================================================================================================================
+
+Java 7
+
+If you just need to do this one time, the Files class makes this easy:
+
+try {
+    Files.write(Paths.get("myfile.txt"), "the text".getBytes(), StandardOpenOption.APPEND);
+}catch (IOException e) {
+    //exception handling left as an exercise for the reader
+}
+However, if you will be writing to the same file many times, the above has to open and close the file on the disk many times, which is a slow operation. In this case, a buffered writer is better:
+
+try(FileWriter fw = new FileWriter("outfilename", true);
+    BufferedWriter bw = new BufferedWriter(fw);
+    PrintWriter out = new PrintWriter(bw))
+{
+    out.println("the text");
+    //more code
+    out.println("more text");
+    //more code
+} catch (IOException e) {
+    //exception handling left as an exercise for the reader
+}
+Notes:
+
+The second parameter to the FileWriter constructor will tell it to append to the file (as opposed to writing a new file).
+Using a BufferedWriter is recommended for an expensive writer (such as FileWriter).
+Using a PrintWriter gives you access to println syntax that you're probably used to from System.out.
+But the BufferedWriter and PrintWriter wrappers are not strictly necessary.
+Older Java
+
+try {
+    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("myfile.txt", true)));
+    out.println("the text");
+    out.close();
+} catch (IOException e) {
+    //exception handling left as an exercise for the reader
+}
+Exception Handling

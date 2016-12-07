@@ -23,7 +23,7 @@ public class Game {
 		 *                                                                                                *
 		 *************************************************************************************************/
 		
-		int numPlayers = 0, bettingPot = 0, currentBet = 0, currentChips = 0;
+		int numPlayers = 0, bettingPot = 0, currentBet = 0, currentChips = 0, tempPot = 0;
 		String userInput1 = null;
 		boolean proceed = false;
 		final int STARTING_CHIPS = 1000; // Number of chips at beginning of game will not change
@@ -175,12 +175,17 @@ public class Game {
 				if(myscore > tempHighestScore){
 					winner = players.get(i).getName();
 					tempHighestScore = myscore;
+					tempPot = players.get(i).getChips();
+					tempPot += bettingPot;
+					players.get(i).increaseChips(tempPot);
+					
 				}
 				//TODO: Handle  ties
 			}
 			
 		}
-		System.out.println("The winner is " + winner);
+		
+		System.out.println("The winner is " + winner + ", and you have been awarded " + bettingPot + " chips.");
 		
 	
 		

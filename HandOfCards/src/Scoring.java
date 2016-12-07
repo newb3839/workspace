@@ -207,15 +207,15 @@ public class Scoring {
 			twoPairs = true;
 			twoPair = true;
 			
-		}else{
+		}/*else{
 			 System.out.println("Two Pairs: -1");
-		}
+		}*/
 		
 		// IF BOOLEAN = TRUE THEN GET THE CARDS
 		if(twoPairs){
 			pair = false;
 			handValue = 2;
-			int highPairIndex = 0, numAtIndex1 = 0, rankNum = 0;
+/*			int highPairIndex = 0, numAtIndex1 = 0, rankNum = 0;
 			String indexCardRank = null, indexCardSuit = null;
 		
 			for(int i = 0; i < cardCount.length; i++){
@@ -235,7 +235,7 @@ public class Scoring {
 					
 					System.out.print(indexCardSuit + " ");
 				}
-			}
+			}*/
 		}
 	}
 	
@@ -323,7 +323,7 @@ public class Scoring {
 		if(threeExists){
 			threeOfAKind = true;
 			handValue = 3;
-			String indexCardRank = null, indexCardSuit = null, indexCardRankValue = null;
+			/*String indexCardRank = null, indexCardSuit = null, indexCardRankValue = null;
 			int threeAtIndex = 0, valueAtIndex1 = 0, rankNum = 0;
 			
 			System.out.print("Three Of A Kind: " );
@@ -349,10 +349,10 @@ public class Scoring {
 					}
 					System.out.println("");
 				}
-			}
-		}else{
+			}*/
+		}/*else{
 			System.out.println("Three Of a Kind: -1");
-		}
+		}*/
 	}
 	
 	
@@ -364,7 +364,7 @@ public class Scoring {
 		
 		for(int i = 0; i < h1.size(); i++){
 			cardsInHand.add(Rank.oneLetterRank2num(h1.get(i).getRank()));
-			System.out.print(h1.get(i).getRank() + h1.get(i).getSuit() + " ");
+			//System.out.print(h1.get(i).getRank() + h1.get(i).getSuit() + " ");
 		}
 		
 		String specialCase = AceSpecialCase(h1);
@@ -400,7 +400,7 @@ public class Scoring {
 		System.out.print("\n");
 		Collections.sort(cardsInHand);
 		for(int i=0;i<cardsInHand.size();i++){
-			System.out.print(cardsInHand.get(i) + " " );
+			//System.out.print(cardsInHand.get(i) + " " );
 		}
 		System.out.print("\n");
 		for(int i=0;i<cardsInHand.size()-1;i++){			
@@ -412,7 +412,7 @@ public class Scoring {
 		if(straight){
 			handValue = 4;
 		}
-		System.out.print(result);
+		//System.out.print(result);
 	}
 	
 	protected String AceSpecialCase(ArrayList<Card> h1){
@@ -482,7 +482,7 @@ public class Scoring {
 		if(isFlush){
 			flush = true;
 			handValue = 5;
-			for(int i = 0; i < h1.size(); i++){
+			/*for(int i = 0; i < h1.size(); i++){
 				currentCardSuit = h1.get(i).getSuit();
 				currentSuitInt = Suit.suit2num(currentCardSuit);
 				currentVerboseSuit = Suit.verboseSuit(currentSuitInt);
@@ -498,10 +498,10 @@ public class Scoring {
 					}
 				}
 			}
-			System.out.println("Flush: Highest Card - " + Rank.num2rank(tempSuitRank) + " of " + currentVerboseSuit);
-		}else{
+			System.out.println("Flush: Highest Card - " + Rank.num2rank(tempSuitRank) + " of " + currentVerboseSuit);*/
+		}/*else{
 			System.out.println("Flush: -1");
-		}
+		}*/
 		
 	}
 	
@@ -603,7 +603,7 @@ public class Scoring {
 		if(fourExists){
 			fourOfAKind = true;
 			handValue = 7;
-			String indexCardRank = null, indexCardSuit = null, indexCardRankValue = null;
+			/*String indexCardRank = null, indexCardSuit = null, indexCardRankValue = null;
 			int threeAtIndex = 0, valueAtIndex1 = 0, rankNum = 0;
 			
 			System.out.print("Four Of A Kind: " );
@@ -628,13 +628,13 @@ public class Scoring {
 						}
 					}
 					System.out.println("");
-				}
+				}*/
 			}
 			
-		}else{
+		}/*else{
 			System.out.println("Four Of a Kind: -1");
-		}
-	}
+		}*/
+	
 	
 	
 	public void straightFlush(){
