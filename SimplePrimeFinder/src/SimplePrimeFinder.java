@@ -9,15 +9,15 @@ public class SimplePrimeFinder {
 		
 		Scanner kb = new Scanner(System.in);
 		long sixtyFourBit = Long.parseUnsignedLong("18446744073709551615");
-		BigInteger sixtyFourBitBIG = BigInteger.valueOf(sixtyFourBit);
-		BigInteger two = BigInteger.valueOf(2);
-		BigInteger ZERO = BigInteger.ZERO;
-		BigInteger b1, b2;
+		//BigInteger sixtyFourBitBIG = BigInteger.valueOf(sixtyFourBit);
+		//BigInteger two = BigInteger.valueOf(2);
+		//BigInteger ZERO = BigInteger.ZERO;
+		//BigInteger b1, b2;
 		
 		
 		
 		final int INT_MAX = 2147483647; //  <==== USED FOR INT MAX
-		String userInput = null;
+		//String userInput = null;
 		
 		
 		//================== USED IN ORIGINAL SIMPLE PRIME FINDER ==============================
@@ -27,25 +27,20 @@ public class SimplePrimeFinder {
 		
 		long userNumber = 0, counter = 0;
 		double sqRoot = 0;
+		int userInput = 0;
 		
 		System.out.print("Enter a number: ");
-		userInput = kb.next();
-		BigInteger userNum = new BigInteger(userInput);
+		userInput = kb.nextInt();
+		//BigInteger userNum = new BigInteger(userInput);
 		System.out.println("The prime numbers greater than " + userNumber + " up to the MAX of a standard integer are: ");
 		
-		if(userNum.mod(two) == ZERO){
-			userNumber++;
-		}
-		
-		while(userNum.compareTo(sixtyFourBitBIG) == -1){
-			
-			
+		if(userInput == 0 || userInput % 2 == 0){
+			userInput++;
 		}
 		
 		
 		
-		
-		for(long a = userNumber; a < sixtyFourBit; a +=2){
+		for(long a = userInput; a < INT_MAX; a +=2){
 			boolean isPrime = true;
 			sqRoot = Math.sqrt(a);
 			//BigDecimal sqRoot1 = new BigDecimal(Math.sqrt(userNum.doubleValue()));

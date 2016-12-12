@@ -49,6 +49,11 @@ public class Player {
 		
 	}
 	
+	public void add1000(){
+		this.chips += 1000;
+		
+	}
+	
 	public int getScore(){
 		return this.score;
 	}
@@ -57,7 +62,9 @@ public class Player {
 		return this.hand;		
 	}
 	
-	
+	public void setHand(Hand h){ // for the hands after the first when one only needs dealt and set to existing player
+		this.hand = h;
+	}
 	public void increaseScore(int s){
 		score += s;		
 	}

@@ -1,0 +1,12 @@
+try {
+	 File file = new File(PATH);
+	 Scanner scanner = new Scanner(file);
+	 while (scanner.hasNextLine()) {
+		 String[] account_arr = scanner.nextLine().split(",");
+		 Account newOne = new Account(Integer.parseInt(account_arr[0]), Double.parseDouble(account_arr[1]), account_arr[2], Integer.parseInt(account_arr[3]));
+		 
+	 }
+	 scanner.close();
+   } catch (FileNotFoundException e) {
+	 e.printStackTrace();
+   }

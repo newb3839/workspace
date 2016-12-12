@@ -76,3 +76,15 @@ try {
     //exception handling left as an exercise for the reader
 }
 Exception Handling
+
+=====================================================================================================================
+**** deals with the UTF-8 issue causing it to print foreign language _____ USE UTF-16
+Try this
+
+Writer out = new BufferedWriter(new OutputStreamWriter(
+    new FileOutputStream("outfilename"), "UTF-8"));
+try {
+    out.write(aString);
+} finally {
+    out.close();
+}

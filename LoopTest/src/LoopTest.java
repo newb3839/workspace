@@ -1,17 +1,20 @@
 import java.util.Scanner;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-//import java.math.BigDecimal;
+import java.io.OutputStreamWriter;
+import java.math.BigDecimal;
 import java.io.PrintWriter;
+import java.io.Writer;
 
 
 public class LoopTest {
 
 	public static void main(String[] args) {
 		
-		int count = 0, my_rank = 5, my_size = 6;
+		int count = 0, my_rank = 2, my_size = 15;
 		long userInput = 3;
 		long a = 0, BLOCK_SIZE = 1000000, TEST_MAX = 10000;
 		
@@ -67,14 +70,23 @@ public class LoopTest {
 	
 			for(long b = a; b < (a + BLOCK_SIZE); b += 2){
 				//System.out.println("    (LOOP 2): " + b);
-				boolean isPrime = true;
+				boolean isPrime = true, exceedsDouble = false;
 				double sqRoot = 0;
+				
 				try{
 					sqRoot = Math.sqrt(b);
+					
 				}catch(Exception ignore){
-					System.out.println("Your square root exceeds the capacity of the double data type!.");
-					System.exit(0);
+					System.out.println("Your square root exceeds the capacity of the double data type!");
+					exceedsDouble = true;
 				}
+				
+				// handles the change from double to a big int cast to a long (loses precision but should work)
+//				if(exceedsDouble){
+//					BigDecimal bdRoot = new BigDecimal(Math.sqrt(b));
+//					//sqRoot = bdRoot.longValue();
+//				}
+				
 				//System.out.println("SQUARE ROOT: "  + sqRoot);
 				for(long c = 2; c <= sqRoot; c++){
 					//System.out.println("        (LOOP 3): " + c);
@@ -88,23 +100,34 @@ public class LoopTest {
 				}
 			}
 			primesInBlock = sb.toString();
-			System.out.println(primesInBlock);
-			
+			//System.out.println(primesInBlock);
 			// Writes the string containing the primes in the block to file ONE TIME per block to save access time
 			try{
-				// create the file for this block and write primes in block to this file
-	        	String fileName = ("Primes " + a + " - " + (a + BLOCK_SIZE) + ".txt");
+				String fileName = ("Primes " + a + " - " + (a + BLOCK_SIZE) + ".txt");
 				File primeFile = new File("C:\\Users\\chris\\Desktop\\PRIMES\\" + fileName);
+				//File primeFile = new File("/cnewby/home/PRIMES/");
 				fileAttempt = primeFile.createNewFile();
-				FileWriter fw = new FileWriter(primeFile, true);
-			    BufferedWriter bw = new BufferedWriter(fw);
-			    PrintWriter out = new PrintWriter(bw);
+				Writer out = new BufferedWriter(new OutputStreamWriter( new FileOutputStream(primeFile), "UTF-16"));
 			    out.write(primesInBlock);
 			    out.close();
-			}catch(Exception ignore){
+			}catch(IOException ignore){
 				System.out.println("There was a problem creating the file." );
 				System.exit(0);
 			}
 		}
 	}
 }
+/*try{
+	// create the file for this block and write primes in block to this file
+	String fileName = ("Primes " + a + " - " + (a + BLOCK_SIZE) + ".txt");
+	File primeFile = new File("C:\\Users\\chris\\Desktop\\PRIMES\\" + fileName);
+	fileAttempt = primeFile.createNewFile();
+	FileWriter fw = new FileWriter(primeFile, true);
+    BufferedWriter bw = new BufferedWriter(fw);
+    PrintWriter out = new PrintWriter(bw);
+    out.write(primesInBlock);
+    out.close();
+}catch(IOException ignore){
+	System.out.println("There was a problem creating the file." );
+	System.exit(0);
+}*/
